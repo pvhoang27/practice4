@@ -84,5 +84,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/CharacterService_1"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/vn/medianews"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-CharacterService, wsimport-client-DataService, wsimport-client-DataService_1, wsimport-client-CharacterService_1"/>
+    <target name="wsimport-client-ObjectService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ObjectService"/>
+        <property name="wsdl-ObjectService" location="xml-resources/web-service-references/ObjectService/wsdl/203.162.10.109_8080/JNPWS/ObjectService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ObjectService" destdir="${build.generated.dir}/jax-wsCache/ObjectService" wsdl="${wsdl-ObjectService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://203.162.10.109:8080/JNPWS/ObjectService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-ObjectService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ObjectService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ObjectService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ObjectService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/ObjectService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/vn/medianews"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-CharacterService, wsimport-client-DataService, wsimport-client-DataService_1, wsimport-client-CharacterService_1, wsimport-client-ObjectService"/>
 </project>
